@@ -1,0 +1,8 @@
+* write simple allocators
+    - stack
+    - pool
+    - ...
+
+* try them with stl data structures
+* compare their speed with default new / malloc
+* add GTests
