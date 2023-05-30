@@ -6,3 +6,8 @@
 * try them with stl data structures
 * compare their speed with default new / malloc
 * add GTests
+
+
+to run tests:
+    go to ./build and type
+    ctest

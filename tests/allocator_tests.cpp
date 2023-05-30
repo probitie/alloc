@@ -1,9 +1,26 @@
+#include "../include/stack_alloc.hpp"
 #include <gtest/gtest.h>
 
-// Demonstrate some basic assertions.
-TEST(HelloTest, BasicAssertions) {
-  // Expect two strings not to be equal.
-  EXPECT_STRNE("hello", "world");
-  // Expect equality.
-  EXPECT_EQ(7 * 6, 42);
+TEST(StackAllocatorTest, SuccessfulAllocation) {
+    stack_allocator_t allocator(1024);
+
+    void* memory = allocator.allocate(100);
+    EXPECT_NE(memory, nullptr);
+}
+
+TEST(StackAllocatorTest, FailedAllocation) {
+    stack_allocator_t allocator(1024);
+
+    void* memory = allocator.allocate(2000);
+    EXPECT_EQ(memory, nullptr);
+}
+
+TEST(StackAllocatorTest, DeallocateAndSuccessfulAllocation) {
+    stack_allocator_t allocator(1024);
+
+    void* memory = allocator.allocate(100);
+    allocator.deallocate();
+    memory = allocator.allocate(1000);
+
+    EXPECT_NE(memory, nullptr);
 }

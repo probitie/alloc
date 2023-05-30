@@ -21,9 +21,12 @@ include_directories(./include)
 file(GLOB_RECURSE SOURCES "src/*.cpp")
 file(GLOB_RECURSE TEST_SOURCES "tests/*.cpp")
 
+add_library(custom_alloc_lib ${SOURCES})
+
 enable_testing()
 
-add_executable(custom_alloc main.cpp ${SOURCES} ${TEST_SOURCES})
+add_executable(custom_alloc main.cpp )
+target_link_libraries(custom_alloc custom_alloc_lib)
 
 # enable GTest
 target_link_libraries(
@@ -34,5 +37,5 @@ include(GoogleTest)
 
 # Create a test executable
 add_executable(custom_alloc_tests ${TEST_SOURCES})
-target_link_libraries(custom_alloc_tests GTest::gtest_main)
+target_link_libraries(custom_alloc_tests custom_alloc_lib GTest::gtest_main)
 gtest_discover_tests(custom_alloc_tests)
